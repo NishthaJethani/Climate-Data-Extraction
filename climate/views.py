@@ -7,6 +7,7 @@ import io
 from datetime import datetime
 import psycopg2
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 # Database configuration
 DB_CONFIG = settings.DB_CONFIG
@@ -35,7 +36,7 @@ def convert_cftime_to_datetime(index):
         return pd.to_datetime([pd.Timestamp(i.strftime("%Y-%m-%d")) for i in index])
     return index
 
-
+@login_required
 def get_timeseries(request):
     try:
         lat = request.GET.get('lat')
@@ -78,7 +79,7 @@ def get_timeseries(request):
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
-
+@login_required
 def download_csv(request):
     try:
         lat = request.GET.get('lat')

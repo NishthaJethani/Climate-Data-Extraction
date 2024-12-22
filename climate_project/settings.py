@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "climate",  # Your custom app
+    "users"
 ]
 
 MIDDLEWARE = [
@@ -78,7 +79,7 @@ DB_CONFIG = {
     'host': 'localhost',
     'database': 'climate_data',
     'user': 'postgres',
-    'password': 'password'
+    'password': 'root'
 }
 
 
@@ -116,3 +117,18 @@ STATIC_URL = "static/"
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',  
+        'NAME': 'climate_data',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+LOGIN_REDIRECT_URL = 'climate:home'
+LOGIN_URL = 'users:login'
